@@ -33,11 +33,10 @@ echo " apkbuilder"
 apkbuilder out.apk -u -z res.apk -f classes.dex
 rm -f classes.dex res.apk
 
-echo " sign"
-apksigner sign --ks debug.keystore --ks-pass pass:android --out out-signed.apk out.apk
-#jarsigner -keystore debug.keystore -storepass android -keypass android -signedjar out-signed.apk out.apk androiddebugkey
-rm -f out.apk
-
 echo " zipalign"
-zipalign 4 out-signed.apk final.apk
+zipalign 4 out.apk out-aligned.apk
 rm -f out-signed.apk
+
+echo " apksigner"
+apksigner sign --ks debug.keystore --ks-pass pass:android --out final.apk out-aligned.apk
+rm -f out.apk
