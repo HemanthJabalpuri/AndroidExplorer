@@ -35,8 +35,8 @@ rm -f classes.dex res.apk
 
 echo " zipalign"
 zipalign 4 out.apk out-aligned.apk
-rm -f out-signed.apk
+rm -f out.apk
 
 echo " apksigner"
 apksigner sign --ks debug.keystore --ks-pass pass:android --out final.apk out-aligned.apk
-rm -f out.apk
+rm -f out-aligned.apk
